@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="太原食探">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="36" x2="448" y2="476" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF9A3D"/>
+      <stop offset="1" stop-color="#FF4D2E"/>
+    </linearGradient>
+    <linearGradient id="bowl" x1="118" y1="246" x2="394" y2="414" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFE7D1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="url(#bg)"/>
+  <path d="M112 280h288c-8 88-64 136-144 136S120 368 112 280Z" fill="url(#bowl)"/>
+  <path d="M136 280c28 32 212 32 240 0" fill="none" stroke="#9B431F" stroke-width="20" stroke-linecap="round"/>
+  <path d="M168 240c56-48 112-48 176 0" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M184 200c40-36 96-36 144 0" fill="none" stroke="#FFE7D1" stroke-width="20" stroke-linecap="round"/>
+  <path d="M336 128v136" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+  <path d="M376 160 336 200 296 160" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M200 352h112" stroke="#FF7A2E" stroke-width="24" stroke-linecap="round"/>
+</svg>

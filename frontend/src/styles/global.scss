@@ -1,0 +1,340 @@
+/* === Taiyuan Food Seeker · Decision-first mobile app === */
+
+:root {
+  --color-primary: #e7682e;
+  --color-primary-strong: #c84f1d;
+  --color-primary-light: #f8e2d4;
+  --color-bg: #faf7f2;
+  --color-text: #201a17;
+  --color-muted: #7f746d;
+  --color-subtle: #a59a92;
+  --color-success: #258a55;
+  --color-card: #fffdf9;
+  --color-border: #eadfd6;
+  --color-soft: #f2ece6;
+  --color-danger: #c93f2e;
+  --color-star: #c87918;
+  --color-brand-dark: #2f211a;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-card: 12px;
+  --radius-sm: 8px;
+  --radius-button: 12px;
+  --radius-tag: 8px;
+
+  --shadow-card: 0 4px 14px rgba(45, 33, 24, 0.05);
+  --shadow-float: 0 8px 24px rgba(45, 33, 24, 0.08);
+  --app-max-width: 430px;
+
+  --font-body: "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans SC", Arial, sans-serif;
+
+  /* Vant theme overrides */
+  --van-primary-color: var(--color-primary);
+  --van-success-color: var(--color-success);
+  --van-danger-color: var(--color-danger);
+  --van-text-color: var(--color-text);
+  --van-text-color-2: var(--color-muted);
+  --van-background: var(--color-bg);
+  --van-background-2: var(--color-card);
+  --van-border-color: var(--color-border);
+  --van-radius-sm: 8px;
+  --van-radius-md: 12px;
+  --van-radius-lg: 16px;
+  --van-button-border-radius: 12px;
+  --van-tag-border-radius: 8px;
+  --van-tabbar-item-active-color: var(--color-primary);
+  --van-tabbar-item-active-background: transparent;
+
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* === Page layout === */
+.mobile-page {
+  width: min(100vw, var(--app-max-width));
+  max-width: 100vw;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(14px, env(safe-area-inset-top)) var(--space-4) calc(112px + env(safe-area-inset-bottom));
+  background: var(--color-bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.mobile-page > * {
+  max-width: 100%;
+}
+
+.page-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.page-subtitle {
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.section {
+  margin-top: 18px;
+}
+
+.section-title {
+  margin: 0 0 12px;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.bottom-safe {
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+/* === Surface / Card === */
+.surface {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+/* === Primary button === */
+.primary-button {
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 100ms, opacity 100ms;
+}
+
+.primary-button:active {
+  transform: scale(0.96);
+}
+
+/* === Secondary button === */
+.secondary-button {
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background: var(--color-card);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* === Vant component overrides === */
+.van-button--primary {
+  border-radius: var(--radius-button) !important;
+}
+
+.van-tag {
+  border-radius: var(--radius-tag) !important;
+}
+
+.van-cell,
+.van-field__control {
+  border-radius: var(--radius-sm) !important;
+}
+
+.van-tabbar {
+  left: 50% !important;
+  right: auto !important;
+  width: min(100vw, var(--app-max-width));
+  max-width: 100vw;
+  height: calc(62px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 2200 !important;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-card);
+  box-shadow: 0 -6px 18px rgba(45, 33, 24, 0.06);
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.van-tabbar-item {
+  min-width: 0;
+  flex: 1 1 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.van-tabbar-item--active {
+  color: var(--color-primary);
+}
+
+.van-tabbar-item__icon {
+  width: 30px;
+  height: 26px;
+  display: inline-grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+
+.van-tabbar-item--active .van-tabbar-item__icon {
+  background: transparent;
+}
+
+.van-nav-bar {
+  background: transparent;
+}
+
+.van-popup,
+.van-dialog {
+  border-radius: var(--radius-card) !important;
+}
+
+.van-dropdown-menu__bar {
+  border-radius: var(--radius-sm) !important;
+}
+
+.pwa-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 3000;
+  width: min(calc(100% - 32px), 398px);
+  min-height: 48px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid rgba(255, 122, 46, 0.24);
+  border-radius: 12px;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 48px rgba(43, 22, 12, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.pwa-toast span {
+  min-width: 0;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.pwa-toast button {
+  min-width: 64px;
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--color-primary);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* === Focus === */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (min-width: 520px) {
+  body {
+    padding: 20px 0;
+  }
+
+  .mobile-page {
+    width: min(calc(100vw - 40px), var(--app-max-width));
+    min-height: calc(100dvh - 40px);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    box-shadow: 0 18px 52px rgba(45, 33, 24, 0.08);
+  }
+
+  .van-tabbar {
+    width: min(calc(100vw - 40px), var(--app-max-width));
+    bottom: 20px !important;
+    border-radius: 0 0 18px 18px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 374px) {
+  .mobile-page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+}
