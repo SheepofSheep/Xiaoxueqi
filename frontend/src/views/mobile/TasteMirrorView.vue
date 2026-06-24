@@ -20,15 +20,15 @@ const questions = [
   { key: 'spicy', title: '今天想要什么口味', options: ['清淡', '微辣', '重辣', '咸香', '酸甜'] },
   { key: 'budget', title: '预算上限', options: [20, 35, 50, 80] },
   { key: 'cuisine', title: '更想吃哪类', options: ['面食', '麻辣烫', '火锅', '烧烤', '快餐', '饮品'] },
-  { key: 'priority', title: '最看重什么', options: ['性价比', '距离近', '评分高', '学生常去'] },
-  { key: 'scene', title: '当前场景', options: ['一人食', '朋友聚餐', '夜宵', '快速解决', '打卡'] },
-  { key: 'tryNew', title: '尝鲜程度', options: ['稳妥', '试试新店'] },
+  { key: 'priority', title: '最看重什么', options: ['性价比', '评分高', '学生党', '赶时间'] },
+  { key: 'scene', title: '当前场景', options: ['一人食', '朋友聚餐', '夜宵', '赶时间', '打卡'] },
+  { key: 'tryNew', title: '尝鲜程度', options: ['稳妥', '打卡'] },
 ] as const
 
 const profileName = computed(() => {
   if (form.scene === '夜宵') return '夜宵雷达型'
   if (form.priority === '性价比') return '学生省钱型'
-  if (form.tryNew === '试试新店') return '探索尝鲜型'
+  if (form.tryNew === '打卡') return '探索尝鲜型'
   return '稳妥好吃型'
 })
 
@@ -55,8 +55,10 @@ function isSelected(key: keyof typeof form, value: string | number) {
 }
 
 function submitMirror() {
-  const tasteTags = [form.spicy, form.priority === '性价比' ? '实惠' : '', form.tryNew === '试试新店' ? '打卡' : ''].filter(Boolean)
-  const sceneTags = [form.scene, form.priority === '学生常去' ? '学生常去' : '', form.priority === '距离近' ? '快速解决' : ''].filter(Boolean)
+  const prioritySceneTags = ['性价比', '学生党', '赶时间'].includes(form.priority) ? [form.priority] : []
+  const tryNewSceneTags = form.tryNew === '打卡' ? ['打卡'] : []
+  const tasteTags = [form.spicy].filter(Boolean)
+  const sceneTags = Array.from(new Set([form.scene, ...prioritySceneTags, ...tryNewSceneTags].filter(Boolean)))
   const payload: RecommendationRequest = {
     district: '尖草坪区',
     businessArea: '中北大学周边',

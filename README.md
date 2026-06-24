@@ -8,17 +8,53 @@
 frontend/   Vue 3 + TypeScript + Vant 用户端和 Element Plus 后台
 backend/    Spring Boot 3 + Java 21 + SQLite 后端
 data/       CSV 模板和备用种子餐厅数据
-docs/       项目内接口和补充文档
-对接文档/  每次 Codex/ClaudeCode/人工完成任务后的日期进度记录
-AGENTS.md  Codex/通用代理项目级硬性规则
-CLAUDE.md  ClaudeCode 项目级硬性规则
+.env.example  本地环境变量模板，不包含真实 Key
+start.bat     Windows 一键启动脚本
 ```
 
-完整软件工程流程文档在上级目录：
+## 运行环境
+
+建议在 Windows 10/11、macOS 或 Linux 上运行。当前项目在 Windows + PowerShell 下验证通过。
+
+必需环境：
 
 ```text
-../工程/
+Java JDK 21
+Maven 3.9+
+Node.js 20+
+pnpm 9+
+Git
 ```
+
+说明：
+
+- 后端基于 Spring Boot 3.3 和 SQLite，SQLite JDBC 会随 Maven 依赖安装，不需要单独安装 SQLite 服务。
+- 前端基于 Vue 3、Vite、TypeScript、Vant、Element Plus。
+- 默认后端端口为 `8080`，默认前端端口为 `5173`。
+- 高德和 DeepSeek Key 都不是必需项；未配置时，本地餐厅库、条件推荐、摇一摇、收藏、浏览记录等核心功能仍可运行。
+- 需要高德实时搜索、逆地理编码或 DeepSeek 增强时，再通过 `.env` 或系统环境变量配置 Key。
+
+## 环境变量
+
+复制 `.env.example` 为 `.env` 后按需填写：
+
+```text
+APP_ENV=dev
+DB_PATH=./data/food-seeker.db
+JWT_SECRET=replace-with-long-random-string
+AMAP_WEB_SERVICE_KEY=
+DEEPSEEK_ENABLED=false
+DEEPSEEK_API_KEY=
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+DEEPSEEK_TIMEOUT_SECONDS=15
+```
+
+安全约束：
+
+- `.env`、`backend/.env`、`frontend/.env` 已在 `.gitignore` 中忽略；
+- 不要把 `AMAP_WEB_SERVICE_KEY`、`DEEPSEEK_API_KEY`、`JWT_SECRET` 的真实值提交到 Git；
+- `backend/src/main/resources/application.yml` 只读取环境变量，不保存真实 Key。
 
 ## 启动后端
 
@@ -46,7 +82,7 @@ http://localhost:8080/swagger-ui.html
 start.bat
 ```
 
-`start.bat` 不内置任何真实 Key。需要高德或 DeepSeek 时，可以复制 `.env.example` 为 `.env` 后填写本机 Key，`.env` 已被 `.gitignore` 忽略；也可以先在系统环境变量或当前命令行中配置：
+`start.bat` 不内置任何真实 Key。需要高德或 DeepSeek 时，可以复制 `.env.example` 为 `.env` 后填写本机 Key，也可以先在系统环境变量或当前命令行中配置：
 
 ```powershell
 $env:AMAP_WEB_SERVICE_KEY="你的高德Web服务Key"
@@ -161,17 +197,13 @@ Android Chrome 打开 `http://电脑IPv4:5173` 后，可在浏览器菜单中尝
 
 ## 数据
 
-当前本地数据库：
+默认数据库路径：
 
 ```text
 backend/data/food-seeker.db
 ```
 
-当前数据：
-
-```text
-179 家 AMAP_REALTIME 真实餐厅
-```
+首次启动时如果该文件不存在，后端会自动创建 SQLite 表结构。仓库不提交本机 `.db` 文件，避免把本地运行状态、测试数据或潜在敏感内容发布到 Git。
 
 CSV 模板仍保留用于备用导入：
 
@@ -185,3 +217,14 @@ data/restaurants_template.csv
 data/restaurants_seed.csv
 ```
 
+需要完整真实餐厅库时，可以在后台管理页使用 CSV 导入，或配置 `AMAP_WEB_SERVICE_KEY` 后通过高德拉取入库。
+
+## 硬性约束
+
+- 真机摇动触发推荐是 P0；
+- 点击按钮只是兜底；
+- 高德批量入库必须走后端管理接口，不得把 Key 写入前端；
+- 高德实时附近结果仅供位置参考，未导入前不参与本地推荐排序；
+- DeepSeek 可解析自然语言为白名单筛选条件，但不决定排序、不生成餐厅事实；
+- API Key 不写入前端或 Git；
+- 每次完成任务必须写入 `对接文档/YYYY-MM-DD_任务名.md`。

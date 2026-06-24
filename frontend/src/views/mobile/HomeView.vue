@@ -175,6 +175,10 @@ onMounted(() => {
         <van-icon name="exchange" size="17" />
         摇一摇
       </button>
+      <button type="button" class="tertiary-decision" @click="go('/taste-mirror')">
+        <van-icon name="smile-o" size="17" />
+        口味魔镜
+      </button>
     </section>
 
     <section class="entry-grid" aria-label="快捷入口">
@@ -363,7 +367,8 @@ onMounted(() => {
   background: var(--color-primary);
 }
 
-.secondary-decision {
+.secondary-decision,
+.tertiary-decision {
   grid-column: 1 / -1;
   border: 1px solid var(--color-border);
   display: inline-flex;
@@ -372,6 +377,11 @@ onMounted(() => {
   gap: 6px;
   color: var(--color-text);
   background: var(--color-soft);
+}
+
+.tertiary-decision {
+  color: var(--color-primary-strong);
+  background: var(--color-primary-light);
 }
 
 .entry-grid {

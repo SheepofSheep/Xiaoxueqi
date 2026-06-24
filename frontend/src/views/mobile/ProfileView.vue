@@ -17,6 +17,7 @@ const stats = computed(() => [
 
 const functionItems = [
   { label: 'AI 推荐', icon: 'search', path: '/search' },
+  { label: '口味魔镜', icon: 'smile-o', path: '/taste-mirror' },
   { label: '摇一摇', icon: 'exchange', path: '/shake' },
   { label: '附近', icon: 'location-o', path: '/nearby' },
   { label: '榜单', icon: 'bar-chart-o', path: '/discover' },
